@@ -1,0 +1,26 @@
+{%
+  set classes = [
+  'items',
+  'gap',
+  'product-content-full',
+]
+%}
+
+<article{{ attributes.addClass(classes) }}>
+  <div class="product-image">
+    {% if product.variation_field_product_image|render is not empty %}
+      <div class="product-variation-image">
+      {{- product.variation_field_product_image -}}
+      </div>
+    {% else %}
+      <div class="product-main-image">{{- product.field_product_image -}}</div>
+      {% if product.field_product_image['#items']|length > 1 %}
+        <div class="product-main-image-nav">{{- product.field_product_image -}}</div>
+      {% endif %}
+    {% endif %}
+  </div>
+  <div class="product-details">
+    <h1 class="product-title">{{- product.title -}}</h1>
+    <div class="product-fields">{{- product|without('field_product_image', 'variation_field_product_image') -}}</div>
+  </div>
+</article>
